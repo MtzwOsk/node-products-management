@@ -1,22 +1,15 @@
 <template>
 <div class="container">
- <button id="show-modal" @click="showModal = true">Show Modal</button>
-  <!-- use the modal component, pass in the prop -->
-  <modal v-if="showModal" @close="showModal = false">
-    <!--
-      you can use custom content here to overwrite
-      default content
-    -->
-    <h3 slot="header">custom header</h3>
-  </modal>
-  <button type="button" @click="addProductTemp">Add new</button>
+  <button type="button" class="btn-green" @click="addProductTemp">Add new</button>
   <table class="product-table">
   <tr>
     <th>Name</th>
     <th>Price</th>
     <th>Image</th>
   </tr>
-    <AddProduct v-if="showAddTemp" @EditToggle="SetEditToggle"/>
+    <AddProduct v-if="showAddTemp" @close="showAddTemp = false">
+      <h3 slot="header">custom header</h3>
+    </AddProduct>  
     <tr v-for="product in products">
       <td>{{ product.Name }}</td>
       <td>{{ product.Price }}</td>
@@ -25,9 +18,9 @@
         <span>
           <button type="button" @click="editProduct">Edit</button>
         </span>
-        <span>
+        <!-- <span>
           <button type="button" @click="deleteProduct">Delete</button>
-        </span>
+        </span> -->
       </td>
     </tr>
   </table>
@@ -71,9 +64,6 @@ export default {
       },
       editProduct: function() {
         this.showAddTemp = true;
-      },
-      SetEditToggle: function(SetEditToggle) {
-        this.showAddTemp = SetEditToggle;
       }
   }
 
@@ -81,40 +71,10 @@ export default {
 </script>
 
 <!-- template for the modal component -->
-<script type="text/x-template" id="modal-template">
-  <transition name="modal">
-    <div class="modal-mask">
-      <div class="modal-wrapper">
-        <div class="modal-container">
 
-          <div class="modal-header">
-            <slot name="header">
-              default header
-            </slot>
-          </div>
-
-          <div class="modal-body">
-            <slot name="body">
-              default body
-            </slot>
-          </div>
-
-          <div class="modal-footer">
-            <slot name="footer">
-              default footer
-              <button class="modal-default-button" @click="$emit('close')">
-                OK
-              </button>
-            </slot>
-          </div>
-        </div>
-      </div>
-    </div>
-  </transition>
-</script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style>
 h3 {
   margin: 40px 0 0;
 }
@@ -136,5 +96,11 @@ a {
   width: 500px;
   margin-left: auto;
   margin-right: auto;
+}
+.btn-green {
+  color: white;
+  background: #4AAE9B;
+  border: 1px solid #4AAE9B;
+  border-radius: 2px;
 }
 </style>
