@@ -1,17 +1,17 @@
 <template>
   <div id="app">
     <h2>Best products in the World!</h2>
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <ProductList msg="Welcome to Your Vue.js App"/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import ProductList from './components/ProductList.vue'
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    ProductList
   }
 }
 </script>
